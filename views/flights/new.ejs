@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+    <h1>Add New Flight</h1>
+    <div id="divider"></div>
+    
+    <% if(locals.error) { error.forEach(e => { %>
+        <p class="error-msg">            
+            <%= e %>
+        </p>
+    <% })}; %>
+
+    <form action="/flights" method="POST">
+        <label for="airline">Airline</label>
+        <input name="airline" type="text">
+        <label for="airport">Airport</label>
+        <select name="airport">
+            <option value="ATL" selected>Atlanta - ATL</option>
+            <option value="DFW">Dallas - DFW</option>
+            <option value="DEN">Denver - DEN</option>
+            <option value="LAX">Los Angeles - LAX</option>
+            <option value="SAN">San Diego - SAN</option>
+        </select>
+        <label for="flightNo">Flight Number</label>
+        <input name="flightNo" type="text">
+        <button type="submit">Add flight</button>
+    </form>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+    <h1>Flights of the Conchords</h1>
+    <div id="divider"></div>
+
+
+    
+    <table>
+        <thead>
+            <td>Airline</td>
+            <td>Airport</td>
+            <td>Flight Number</td>
+            <td>Depart Date</td>
+        </thead>
+        <tbody>
+            <% flights.forEach(f => { %>
+                <tr>
+                    <td><%= f.airline %></td>
+                    <td><%= f.airport %></td>
+                    <td><%= f.flightNo %></td>
+                    <td><%= dateFormat(f.departs, "dddd, mmmm dS, yyyy, h:MM TT") %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<%- include('../partials/footer') %>
