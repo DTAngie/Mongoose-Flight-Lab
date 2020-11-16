@@ -8,16 +8,20 @@ module.exports = {
 };
 
 function index(req, res) {
-    Flight.find({}, function(err, allFlights) {
+    let today = new Date();
+    Flight.find({}).sort({departs: 'ascending'}).exec(function(err, allFlights) {
         res.render('flights/index', {
             flights: allFlights,
-            dateFormat
+            dateFormat,
+            today
         });
     });
 }
 
 function newFlight(req, res){
-    res.render('flights/new');
+    let date = new Date();
+    date = date.toISOString().slice(0,16);
+    res.render('flights/new', {date: date});
 }
 
 function create(req, res){
@@ -29,6 +33,10 @@ function create(req, res){
 
     if(req.body.airport){
         newFlight.airport = req.body.airport;
+    }
+
+    if(req.body.departs){
+        newFlight.departs = req.body.departs;
     }
 
     Flight.create(newFlight, function(err, flight){

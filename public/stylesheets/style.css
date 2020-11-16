@@ -12,6 +12,7 @@ nav {
   margin-left: -60px;
   margin-right: -60px;
   background-color: goldenrod;
+  padding: 0 10px;
 }
 
 nav ul {
@@ -22,7 +23,6 @@ nav li {
   padding: 20px 15px;
   display: inline;
   list-style-type: none;
-  margin: 0 10px;
   text-align: center;
 }
 
@@ -30,14 +30,24 @@ nav li:hover {
   background-color: rgb(226, 186, 84);
 }
 
-nav li a {
+nav a {
   color: #272727;
   font-weight: bold;
   text-decoration: none;
 }
 
-nav li:hover a {
+nav a:hover {
   color: blue;
+}
+
+input, select {
+  display: block;
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
 #divider {
@@ -61,7 +71,7 @@ table td {
   padding: 5px 10px;
 }
 
-p.error-msg {
+p.error-msg, .past {
   color: red;
   font-weight: bold;
 }
