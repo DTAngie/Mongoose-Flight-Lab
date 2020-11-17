@@ -11,8 +11,12 @@
 
 Destinations:
 <ul>
-    <% flight.destinations.forEach(function(d) { %>
-    <li><%= d.airport %> | <%= d.arrival %></li>
+    <% sortedDestinations.forEach(function(d) { %>
+    <li><%= d.airport %> | <%= d.arrival %>
+        <form id="delete-destination-form" action="/flights/<%= flight._id %>/destinations/<%= d._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
      
     <% }); %>
 </ul>
@@ -21,11 +25,11 @@ Destinations:
     <h3>Add Destination</h3>
     <label for="airport">Airport</label>
     <select name="airport">
-        <option value="ATL" selected>Atlanta - ATL</option>
-        <option value="DFW">Dallas - DFW</option>
-        <option value="DEN">Denver - DEN</option>
-        <option value="LAX">Los Angeles - LAX</option>
-        <option value="SAN">San Diego - SAN</option>
+        <% approvedAirports.forEach(function(a){
+           if(flight.destinations.findIndex(d => d.airport === a) < 0) { %>
+               <option value="<%= a %>"><%= a %></option>
+           <% }
+        }); %>
     </select>
     <label for="arrival">Arrival Date / Time</label>
     <input name="arrival" type="datetime-local">
