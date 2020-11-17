@@ -4,7 +4,8 @@ var dateFormat = require('dateformat');
 module.exports = {
     index,
     create,
-    new: newFlight
+    new: newFlight,
+    show
 };
 
 function index(req, res) {
@@ -20,6 +21,7 @@ function index(req, res) {
 
 function newFlight(req, res){
     let date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
     date = date.toISOString().slice(0,16);
     res.render('flights/new', {date: date});
 }
@@ -57,5 +59,14 @@ function create(req, res){
         } else {
             res.redirect('/flights');
         }
+    });
+}
+
+function show(req, res) {
+    Flight.findById(req.params.id, function(err, flight){
+        if(err) {
+            res.render('flights/index')
+        }
+        res.render(`flights/show`, {flight});
     });
 }

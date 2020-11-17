@@ -3,6 +3,19 @@ var dateFormat = require('dateformat');
 var now = new Date();
 now.setFullYear(now.getFullYear() + 1);
 
+const destinationSchema = new mongoose.Schema({
+    airport: {
+        type: String,
+        enum: ['ATL', 'DFW', 'DEN', 'LAX', 'SAN'],
+        description: "Please choose ATL, DFW, DEN, LAX, or SAN.",
+    },
+    arrival: {
+        type: Date
+    }
+}, {
+    timestamps: true
+});
+
 const flightSchema = new mongoose.Schema({
     airline: {
         type: String,
@@ -23,7 +36,8 @@ const flightSchema = new mongoose.Schema({
     departs: {
         type: Date,
         default: now
-    }
+    },
+    destinations: [destinationSchema],
 });
 
 module.exports = mongoose.model('Flight', flightSchema);

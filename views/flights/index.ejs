@@ -7,18 +7,20 @@
     
     <table>
         <thead>
-            <td>Airline</td>
-            <td>Airport</td>
-            <td>Flight Number</td>
-            <td>Depart Date</td>
+            <th>Airline</th>
+            <th>Airport</th>
+            <th>Flight Number</th>
+            <th>Depart Date</th>
+            <th></th>
         </thead>
         <tbody>
             <% flights.forEach(f => { %>
-                <tr class= <%= (today - f.departs < 0 ) ? "past" : ""; %>>
+                <tr class= <%= (today - f.departs > 0 ) ? "past" : ""; %>>
                     <td><%= f.airline %></td>
                     <td><%= f.airport %></td>
                     <td><%= f.flightNo %></td>
                     <td><%= dateFormat(f.departs, "dddd, mmmm dS, yyyy, h:MM TT") %></td>
+                    <td><a href="/flights/<%= f._id %>">Details</a></td>
                 </tr>
             <% }); %>
         </tbody>

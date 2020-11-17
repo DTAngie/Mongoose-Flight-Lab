@@ -61,7 +61,7 @@ table, form {
   margin-top: 40px;
 }
 
-table thead td {
+table thead th {
   font-weight: bold;
   text-decoration: underline;
   min-width: 120px;
@@ -74,4 +74,11 @@ table td {
 p.error-msg, .past {
   color: red;
   font-weight: bold;
+}
+
+#new-destination-form {
+  width:300px;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
