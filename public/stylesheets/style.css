@@ -3,6 +3,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+h2 {
+  margin-top: 40px;
+}
+
 a {
   color: #00B7FF;
 }
@@ -69,6 +73,7 @@ table thead th {
 
 table td {
   padding: 5px 10px;
+  text-align: center;
 }
 
 p.error-msg, .past {
@@ -77,13 +82,52 @@ p.error-msg, .past {
 }
 
 #new-destination-form {
-  width:300px;
   border: 1px solid #ccc;
   padding: 10px 20px;
   border-radius: 5px;
+  display: inline-block;
 }
 
-#delete-destination-form {
+#new-destination-form input {
+  display: inline-block;
+}
+
+#delete-destination-form, #delete-ticket-form {
   display: inline-block;
   margin-top: 5px;
+}
+
+button {
+  background-color: rgb(226, 186, 84);
+  color: #272727;
+  border-radius: 3px;
+  padding: 5px;
+  border: 1px solid rgb(206, 169, 75);
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+button:hover {
+  color: #383737;
+  background-color: rgb(226, 192, 107);
+}
+
+#flight-details li {
+  list-style-type: none;
+}
+
+#flight-details span{
+  color: rgb(18, 46, 175);
+  font-weight: bold;
+}
+
+div.left {
+  width: 49%;
+  float: left;
+}
+
+div.right {
+  width: 49%;
+  float: right;
 }

@@ -2,37 +2,68 @@
 <%- include('../partials/nav') %>
 
 <h2>Flight Details</h2>
-<ul>
-    <li>Flight Number: <%= flight.flightNo %></li>
-    <li>Airline: <%= flight.airline %></li>
-    <li>Airport: <%= flight.airport %></li>
-    <li>Departs: <%=flight.departs %></li>
+<ul id="flight-details">
+    <li><span>Flight Number:</span> <%= flight.flightNo %></li>
+    <li><span>Airline:</span> <%= flight.airline %></li>
+    <li><span>Airport:</span> <%= flight.airport %></li>
+    <li><span>Departs:</span> <%=flight.departs %></li>
 </ul>
 
-Destinations:
-<ul>
+<h2>Destinations</h2>
+<table>
+    <thead>
+        <th>Airport</th>
+        <th>Departure</th>
+        <th></th>
+    </thead>
     <% sortedDestinations.forEach(function(d) { %>
-    <li><%= d.airport %> | <%= d.arrival %>
-        <form id="delete-destination-form" action="/flights/<%= flight._id %>/destinations/<%= d._id%>?_method=DELETE" method="POST">
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-     
+        <tr>
+            <td><%= d.airport %></td>
+            <td><%= d.arrival %></td>
+            <td><form id="delete-destination-form" action="/flights/<%= flight._id %>/destinations/<%= d._id%>?_method=DELETE" method="POST">
+                    <button type="submit">Delete</button>
+                </form></td>
+        </tr>
     <% }); %>
-</ul>
+</table>
 
 <form id="new-destination-form" action="/flights/<%= flight._id %>/destinations" method="POST">
     <h3>Add Destination</h3>
-    <label for="airport">Airport</label>
-    <select name="airport">
-        <% approvedAirports.forEach(function(a){
-           if(flight.destinations.findIndex(d => d.airport === a) < 0) { %>
-               <option value="<%= a %>"><%= a %></option>
-           <% }
-        }); %>
-    </select>
-    <label for="arrival">Arrival Date / Time</label>
-    <input name="arrival" type="datetime-local">
-    <input type="submit" value="Add Destination">
+    <div class="left">
+        <label for="airport">Airport</label>
+        <select name="airport">
+            <% approvedAirports.forEach(function(a){
+            if(flight.destinations.findIndex(d => d.airport === a) < 0) { %>
+                <option value="<%= a %>"><%= a %></option>
+            <% }
+            }); %>
+        </select>
+    </div>
+    <div class="right">
+        <label for="arrival">Arrival Date / Time</label>
+        <input name="arrival" type="datetime-local">
+    </div>
+    <button type="submit">Add Destination</button>
 </form>
+
+<h2>Tickets</h2>  <a id="new-ticket-btn" href="/flights/<%=flight._id %>/tickets/new"><button>Add New Ticket</button></a>
+<table>
+    <thead>
+        <th>Flight Number</th>
+        <th>Seat</th>
+        <th>Price</th>
+        <th></th>
+    </thead>    
+    <% tickets.forEach(function(t) { %>
+    <tr>
+        <td><%= t.flight %></td>
+        <td><%= t.seat %></td>
+        <td>$ <%= t.price.toFixed(2) %></td>
+        <td><form id="delete-ticket-form" action="/flights/<%= flight._id %>/tickets/<%= t._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form></td>
+    </tr>
+    <% }); %>
+</table>
+
 <%- include('../partials/footer') %>

@@ -17,7 +17,6 @@ function create(req, res) {
 }
 
 function deleteDestination(req, res) {
-    console.log('deleting');
     Flight.findById(req.params.id, function(err, flight){
         const destination = flight.destinations.findIndex(d => d.id === req.params.destId);
         flight.destinations.splice(destination, 1);

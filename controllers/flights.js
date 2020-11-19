@@ -1,6 +1,6 @@
 const Flight = require('../models/flights');
+const Ticket = require('../models/tickets');
 var dateFormat = require('dateformat');
-const flights = require('../models/flights');
 const approvedAirports = ['ATL', 'DFW', 'DEN', 'LAX', 'SAN'];
 
 module.exports = {
@@ -71,9 +71,12 @@ function show(req, res) {
         let sortedDestinations = flight.destinations.sort(function(a,b){
             return a.arrival - b.arrival;
         });
+        Ticket.find({flight: flight._id}, function(err, tickets){
+            res.render(`flights/show`, {flight, tickets, sortedDestinations, approvedAirports});
+
+        });
         if(err) {
             res.render('flights/index',)
         }
-        res.render(`flights/show`, {flight, sortedDestinations, approvedAirports});
     });
 }
